@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-content>
+      <!--<form [formGroup]="form" (ngSubmit)="onSubmit()">-->
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <h2>Log In</h2>
+        <!--<mat-error *ngIf="loginInvalid">-->
+        <mat-error>
+          Introduzca un usuario
+        </mat-error>
+        <mat-form-field class="full-width-input" hintLabel="active directory user">
+          <!--<input matInput placeholder="nombre" formControlName="username" required>-->
+          <input matInput placeholder="nombre" ngModel name="username" required>
+          <mat-error>
+            Usuario active directory
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width-input" hintLabel="active directory pass">
+          <!--<input matInput type="password" placeholder="Password" formControlName="password" required>-->
+          <input matInput type="password" placeholder="Password" ngModel name="password" required minlength="5">
+          <mat-error>
+            password
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <input matInput placeholder="Fecha de nacimiento" 
+          [matDatepicker]="picker" ngModel name="password">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+
+        <button mat-raised-button color="primary" [disabled]="f.invalid">Login</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
