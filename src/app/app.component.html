@@ -1,3 +1,33 @@
-<app-header></app-header>
-  <router-outlet></router-outlet>
+  
+  <!-- Creates a layout with a left-positioned sidenav and explicit content. 
+<mat-sidenav-container>
+  <mat-sidenav #sidenav role="navigation">
+  </mat-sidenav>
+  <mat-sidenav-content>
+     <mat-toolbar color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>{{title}}</span>
+      <span class="nav-spacer"></span>
+      <button mat-icon-button routerLink="login">
+        <mat-icon>login</mat-icon>
+      </button>      
+    </mat-toolbar>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>-->
+
+
+<mat-drawer-container>
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidenav></app-sidenav>
+  </mat-drawer>
+  <mat-drawer-container>
+    <app-header (toggleSidebarForMe)="sideBarToggler()"></app-header>
+    <router-outlet></router-outlet>   
+  </mat-drawer-container>
+</mat-drawer-container>
+
+
 

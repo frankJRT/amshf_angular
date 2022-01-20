@@ -1,41 +1,29 @@
-<mat-toolbar color="primary" class="expanded-toolbar">
-    <span>
-      <button mat-button routerLink="/">{{title}}</button>
-      <button mat-button routerLink="/"><mat-icon>home</mat-icon></button>
-    </span>
-    <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <button mat-button routerLink="/signup" *ngIf="!isAuthenticated">
-        <mat-icon>power_settings_new</mat-icon>
-        Login
-      </button>
-      <button mat-button *ngIf="isAuthenticated" (click)="logout()">
-        <mat-icon>exit_to_app</mat-icon>
-        Logout
-      </button>
-      <button mat-button routerLink="/game">
-        <mat-icon>gamepad</mat-icon>
-        Play
-      </button>
+<mat-toolbar>
+  <mat-toolbar-row class="justify-content-between"> 
+    <button mat-icon-button (click)="toggleSidebar()" [disabled]="isLoggedin === false"><mat-icon>menu</mat-icon></button>    
+    Administración Maestra SHF
+    
+    <div class="row mr-2 ml-auto">      
+      <ul *ngIf="isLoggedin === false">
+        <li>
+          <button  mat-stroked-button (click)="loginWithGoogle()"><mat-icon>exit_to_app</mat-icon>Entrar con Gmail</button>
+        </li> 
+      </ul>
+      
+      <ul *ngIf="isLoggedin === true">
+        <li>
+          <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
+            <img src="{{socialUser.photoUrl}}" alt="" class="user-image mr-1 p-2"/>
+            {{socialUser.email}}
+            <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <mat-list-item role="listitem">{{socialUser.firstName}} {{socialUser.lastName}}</mat-list-item>
+            <button mat-menu-item (click)="logOut()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+          </mat-menu>
+        </li>
+      </ul>
+
     </div>
-    <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-      <mat-icon>menu</mat-icon>
-    </button>
-  </mat-toolbar>
-  <mat-menu x-position="before" #menu="matMenu">
-    <button mat-menu-item routerLink="/">
-      <mat-icon>home</mat-icon>
-      Home
-    </button>
-    <button mat-menu-item routerLink="/game">
-      <mat-icon>gamepad</mat-icon>
-      Play
-    </button>
-    <button mat-menu-item routerLink="/login" *ngIf="!isAuthenticated">
-      <mat-icon>power_settings_new</mat-icon>
-      Login
-    </button>
-    <button mat-menu-item *ngIf="isAuthenticated" (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-      Logout
-    </button>
-  </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

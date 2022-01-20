@@ -1,0 +1,28 @@
+/*
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+    height: 100%;
+}
+
+mat-sidenav{
+    width: 200px;
+}
+
+.nav-spacer {
+    flex: 1 1 auto;
+  }
+
+*/
+:host{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+mat-drawer{
+    width: 260px;
+    background-color: rgb(28, 34, 30);
+}
+
+mat-drawer-container{
+    height: 100%;
+}

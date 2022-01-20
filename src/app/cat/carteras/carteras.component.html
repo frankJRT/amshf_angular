@@ -1,1 +1,37 @@
-<p>carteras works!</p>
+<div class="demo-button-container">
+    <button mat-raised-button (click)="addData()" class="demo-button">
+      Add data
+    </button>
+    <button
+        mat-raised-button
+        [disabled]="!dataToDisplay.length"
+        (click)="removeData()"
+        class="demo-button">
+      Remove data
+    </button>
+  </div>
+  
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="i_Cartera_Comportamiento">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{element.i_Cartera_Comportamiento}}</td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="d_Cartera_Comportamiento">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.d_Cartera_Comportamiento}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="n_Cartera_Comportamiento_Clave">
+        <th mat-header-cell *matHeaderCellDef>Clave</th>
+        <td mat-cell *matCellDef="let element">{{element.n_Cartera_Comportamiento_Clave}}</td>
+      </ng-container>
+  
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

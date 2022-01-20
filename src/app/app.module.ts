@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,11 @@ import { HomeComponent } from './layout/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {  GoogleLoginProvider } from 'angularx-social-login';
+import { DashboardComponent } from './layout/dashboard/dashboard.component';
+import { SidenavComponent } from './layout/sidenav/sidenav.component';
+import { carteraInterceptor } from './interceptors/cartera.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,17 +28,36 @@ import { FooterComponent } from './layout/footer/footer.component';
     CarterasComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    DashboardComponent,
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule,    
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1061237230787-7io2ufggldm8bauo73849ik303i9ot77.apps.googleusercontent.com'
+            )
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }, carteraInterceptor
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
