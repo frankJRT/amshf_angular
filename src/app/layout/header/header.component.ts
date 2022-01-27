@@ -17,8 +17,9 @@ export class HeaderComponent implements OnInit {
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
     
   loginForm!: FormGroup;
-  socialUser!: SocialUser;
-  isLoggedin: boolean = false;  
+  public socialUser = new SocialUser();
+  isLoggedin!: boolean;
+  
 
   title = 'amshf'; 
 
@@ -31,17 +32,19 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
+   /* this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
-    });    
-    
-    
-    this.socialAuthService.authState.subscribe((data) => {
-      this.socialUser = data;
-      this.isLoggedin = (this.socialUser != null && this.tokenService.getToken()!= null);   
-      //console.log(this.socialUser);
     });
+    */
+    
+    this.isLoggedin = (this.tokenService.getToken!=null);
+    this.socialAuthService.authState.subscribe(
+      (data) => {
+      this.socialUser = data;
+      this.isLoggedin = (this.socialUser != null && this.tokenService.getToken()!= null);
+    });
+
   }
 
   toggleSidebar(){
@@ -49,7 +52,7 @@ export class HeaderComponent implements OnInit {
   }
   
 
-  loginWithGoogle(): void {
+  loginWithGoogle(): void {    
     //this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
 
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
@@ -58,7 +61,7 @@ export class HeaderComponent implements OnInit {
         const tokenGoogle = new TokenDto(this.socialUser.idToken);
         this.oauthService.google(tokenGoogle).subscribe(
           res => {
-            this.tokenService.setToken(res.value);
+            this.tokenService.setToken(res.value,this.socialUser.email,this.socialUser.name, this.socialUser.photoUrl);
             this.isLoggedin = true;
             this.router.navigate(["/dashboard"]);
           },
@@ -72,6 +75,9 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(): void {
+    this.tokenService.logOut();
+    this.isLoggedin=false;
+    this.toggleSidebar();
     this.socialAuthService.signOut().then(
       data => {
         this.tokenService.logOut();
@@ -81,4 +87,25 @@ export class HeaderComponent implements OnInit {
       }
     );    
   }
+
+  getUsuario():string|null{
+    if (this.tokenService.getName()!=null){
+      return this.tokenService.getName();
+    }
+    return null;
+  }
+
+  getEmail():string|null{
+    if (this.tokenService.getEmail()!=null){
+      return this.tokenService.getEmail();
+    }
+    return null;
+  }
+  getImagen():string|null{
+    if (this.tokenService.getPotho()!=null){
+      return this.tokenService.getPotho();
+    }
+    return null;
+  }
+  
 }

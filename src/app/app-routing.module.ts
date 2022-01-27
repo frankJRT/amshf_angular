@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { CarterasComponent } from './cat/carteras/carteras.component';
+import { CarteraGuard } from './guards/cartera.guard';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { HomeComponent } from './layout/home/home.component';
 
@@ -12,7 +13,7 @@ const routes: Routes = [
   { path:'dashboard', component:DashboardComponent },
   { path:'signup', component:SignupComponent },
   { path:'login', component:LoginComponent },
-  { path:'carteras', component:CarterasComponent },  
+  { path:'carteras', component:CarterasComponent,canActivate:[CarteraGuard] },  
   { path: '**', redirectTo:'', pathMatch: 'full' }
 ];
 
