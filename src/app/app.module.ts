@@ -19,6 +19,9 @@ import {  GoogleLoginProvider } from 'angularx-social-login';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { SidenavComponent } from './layout/sidenav/sidenav.component';
 import { carteraInterceptor } from './interceptors/cartera.interceptor';
+import { AdminPrimarioComponent } from './cat/admin-primario/admin-primario.component';
+import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
+import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { carteraInterceptor } from './interceptors/cartera.interceptor';
     FooterComponent,
     DashboardComponent,
     SidenavComponent,
+    AdminPrimarioComponent,
+    NopagefoundComponent,
+    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,
