@@ -7,6 +7,7 @@ import { CarterasComponent } from './pages/cat/carteras/carteras.component';
 import { CarteraGuard } from './guards/cartera.guard';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { HomeComponent } from './layout/home/home.component';
+import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
 
 const routes: Routes = [
   { path:'', component:HomeComponent},
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path:'login', component:LoginComponent },
   { path:'carteras', component:CarterasComponent,canActivate:[CarteraGuard] },  
   { path:'primario', component:AdminPrimarioComponent,canActivate:[CarteraGuard] },  
-  { path: '**', redirectTo:'', pathMatch: 'full' }
+  { path: '**', component:NopagefoundComponent}
 ];
 
 @NgModule({

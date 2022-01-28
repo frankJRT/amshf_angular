@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.modules';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
-import { CarterasComponent } from './cat/carteras/carteras.component';
+import { CarterasComponent } from './pages/cat/carteras/carteras.component';
 import { HomeComponent } from './layout/home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './layout/header/header.component';
@@ -19,9 +19,8 @@ import {  GoogleLoginProvider } from 'angularx-social-login';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { SidenavComponent } from './layout/sidenav/sidenav.component';
 import { carteraInterceptor } from './interceptors/cartera.interceptor';
-import { AdminPrimarioComponent } from './cat/admin-primario/admin-primario.component';
+import { AdminPrimarioComponent } from './pages/cat/admin-primario/admin-primario.component';
 import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
-import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +35,6 @@ import { BreadcrumbsComponent } from './shared/breadcrumbs/breadcrumbs.component
     SidenavComponent,
     AdminPrimarioComponent,
     NopagefoundComponent,
-    BreadcrumbsComponent,
   ],
   imports: [
     BrowserModule,

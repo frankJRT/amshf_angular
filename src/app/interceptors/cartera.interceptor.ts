@@ -4,10 +4,12 @@ import {
   HttpHandler,
   HttpEvent,
   HttpInterceptor,
-  HTTP_INTERCEPTORS
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { TokenDtoService } from '../service/token-dto.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class CarteraInterceptor implements HttpInterceptor {
@@ -22,7 +24,14 @@ export class CarteraInterceptor implements HttpInterceptor {
       authReq = authReq.clone({headers: request.headers.set('Authorization','Bearer '+token)});
     }
 
-    return next.handle(authReq);
+    return next.handle(authReq).pipe(catchError(this.manejaError));
+  }
+
+  manejaError( error: HttpErrorResponse){
+    console.log("Error en la peticion")
+    console.warn(error);
+    
+    return throwError(() =>new Error("Error en la peticion"));
   }
 }
 

@@ -26,6 +26,11 @@ export class AppComponent implements OnInit{
     
   }
 
+  closeToggler(){    
+    console.log("entra")
+      this.sideBarOpen=false; 
+  }
+
   constructor(private tokenService: TokenDtoService
   ) { }
 

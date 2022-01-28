@@ -1,8 +1,9 @@
+
+<!--
 <mat-toolbar>
   <mat-toolbar-row class="justify-content-between"> 
-    <button mat-icon-button (click)="toggleSidebar()" [disabled]="isLoggedin === false"><mat-icon>menu</mat-icon></button>    
-    Administración Maestra SHF
-    
+    <button mat-icon-button (click)="toggleSidebar()" [disabled]="isLoggedin === false"><mat-icon>menu</mat-icon></button> 
+    <span>My App</span>
     <div class="row mr-2 ml-auto">      
       <ul *ngIf="isLoggedin === false">
         <li>
@@ -26,4 +27,29 @@
 
     </div>
   </mat-toolbar-row>
+</mat-toolbar>
+-->
+
+<mat-toolbar >
+  <button mat-icon-button (click)="toggleSidebar()" [disabled]="isLoggedin === false"><mat-icon>menu</mat-icon></button> 
+  <span>Admin SHF</span>
+  <span class="example-spacer"></span>
+  <ul *ngIf="isLoggedin === false">
+    <li>
+      <button  mat-stroked-button (click)="loginWithGoogle()"><mat-icon>exit_to_app</mat-icon>Entrar con Gmail</button>
+    </li> 
+  </ul>
+  <ul *ngIf="isLoggedin === true">
+    <li>
+      <button mat-button [matMenuTriggerFor]="menu" class="user mt-2 d-flex align-items-center">
+        <img src="{{getImagen()}}" alt="" class="user-image mr-1 p-2"/>
+        {{getEmail()}}
+        <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-list-item role="listitem">{{getUsuario()}}</mat-list-item>
+        <button mat-menu-item (click)="logOut()"><mat-icon>exit_to_app</mat-icon>Logout</button>
+      </mat-menu>
+    </li>
+  </ul>
 </mat-toolbar>

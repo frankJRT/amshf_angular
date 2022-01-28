@@ -13,7 +13,9 @@ export class CarterasComponent implements OnInit {
 
   displayedColumns: string[] = ['i_Cartera_Comportamiento', 'd_Cartera_Comportamiento',
   'n_Cartera_Comportamiento_Clave','n_Cartera_Comportamiento','actions'];
+
   carteras!:Cartera[];
+  
   constructor(private carteraService:CarteraService) { }
 
   ngOnInit(): void {

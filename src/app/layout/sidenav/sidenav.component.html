@@ -4,17 +4,23 @@
     </div>
     <mat-divider></mat-divider>-->
     <h2  matSubheader class="mt-2">Aplicaciones</h2>
-    <a mat-list-item routerLink="/home" routerLinkActive="list-item-active">
+    <a mat-list-item routerLink="/home" routerLinkActive="list-item-active" (click)="onClose()">
         <mat-icon>home</mat-icon>HOME
     </a>
 
-    <a mat-list-item routerLink="/dashboard" routerLinkActive="list-item-active">
+    <a mat-list-item routerLink="/dashboard" routerLinkActive="list-item-active" (click)="onClose()">
         <mat-icon>dashboard</mat-icon> Dashboard
     </a>
 
-    <a mat-list-item routerLink="/carteras"><mat-icon>edit</mat-icon>Carteras</a>
-    <a mat-list-item><mat-icon>edit</mat-icon>Link 2</a>
-    <a mat-list-item><mat-icon>edit</mat-icon>Link 3</a>
-    <a mat-list-item><mat-icon>edit</mat-icon>Link 4</a>
+    <a mat-list-item (click)="toggleMenu()">
+        <mat-icon mat-list-icon>business</mat-icon>Administracion
+        <mat-icon *ngIf="!showMenu">chevron_right</mat-icon>
+        <mat-icon *ngIf="showMenu">expand_more</mat-icon>
+      </a>
+      <mat-nav-list class="sidenav-submenu" *ngIf="showMenu">
+        <a mat-list-item routerLink="/carteras" (click)="onClose()"><mat-icon>edit</mat-icon>Carteras</a>
+        <a mat-list-item routerLink="/primario" (click)="onClose()"><mat-icon>edit</mat-icon>Primario</a>        
+      </mat-nav-list>
 
+      
 </mat-nav-list>
