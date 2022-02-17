@@ -15,14 +15,20 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatListModule} from '@angular/material/list';
-import {MatTreeModule} from '@angular/material/tree';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatListModule } from '@angular/material/list';
+import { MatTreeModule } from '@angular/material/tree';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDialogModule } from "@angular/material/dialog";
+//import { MatTabsModule } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
     exports:[
+        MatTabsModule,
         MatSidenavModule,
         MatToolbarModule,
         MatIconModule,
@@ -41,7 +47,10 @@ import { MatSliderModule } from '@angular/material/slider';
         MatNativeDateModule,
         MatListModule,
         MatTreeModule,
-        MatSliderModule
+        MatSliderModule,
+        MatDialogModule,
+        MatCheckboxModule,
+        MatProgressBarModule
     ]
 })
 export class MaterialModule{}

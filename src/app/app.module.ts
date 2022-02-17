@@ -1,50 +1,40 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.modules';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
-import { CarterasComponent } from './pages/cat/carteras/carteras.component';
-import { HomeComponent } from './layout/home/home.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './layout/header/header.component';
-import { FooterComponent } from './layout/footer/footer.component';
+
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {  GoogleLoginProvider } from 'angularx-social-login';
-import { DashboardComponent } from './layout/dashboard/dashboard.component';
-import { SidenavComponent } from './layout/sidenav/sidenav.component';
+import { GoogleLoginProvider } from 'angularx-social-login';
 import { carteraInterceptor } from './interceptors/cartera.interceptor';
-import { AdminPrimarioComponent } from './pages/cat/admin-primario/admin-primario.component';
-import { NopagefoundComponent } from './pages/nopagefound/nopagefound.component';
+
+import { AuthModule } from './auth/auth.module';
+
+import { PagesModule } from './pages/pages.module';
+import { MaterialModule } from './material.modules';
+import { LayoutModule } from './layout/layout.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+
+
 
 @NgModule({
   declarations: [
-    AppComponent,
-    SignupComponent,
-    LoginComponent,
-    CarterasComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    DashboardComponent,
-    SidenavComponent,
-    AdminPrimarioComponent,
-    NopagefoundComponent,
+    AppComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,    
-    MaterialModule,
-    BrowserAnimationsModule,
     HttpClientModule,
-    SocialLoginModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    MaterialModule,
+    SocialLoginModule,
+    AuthModule,
+    LayoutModule,
+    PagesModule,    
+    CommonModule,
+    AppRoutingModule
+   
   ],
   providers: [
     {

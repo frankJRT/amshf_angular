@@ -1,0 +1,11 @@
+
+
+<mat-card>
+  <mat-card-title>{{cartera}}</mat-card-title>
+  <mat-card-subtitle>{{clave}}</mat-card-subtitle>
+  <mat-tab-group mat-align-tabs="start">
+    <mat-tab label="Comportamiento"><app-comportamiento  [idCartera]="idcartera"></app-comportamiento></mat-tab>
+    <mat-tab label="Second">Buro Credito</mat-tab>
+    <mat-tab label="Third"></mat-tab>
+  </mat-tab-group>
+</mat-card>
