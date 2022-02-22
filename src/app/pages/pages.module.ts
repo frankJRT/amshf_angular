@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComportamientoComponent } from "./cat/carteras/comportamiento/comportamiento.component"; 
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
+import { DetalleArchivo } from "./cat/carteras/comportamiento/DetalleArchivo/detallearchivo.component";
+import { ActionComportamiento } from "./cat/carteras/comportamiento/ActionComportamiento/actioncomportamiento.component";
 
 @NgModule({
     declarations: [
@@ -16,7 +18,9 @@ import { BrowserModule } from '@angular/platform-browser';
         CarterasComponent,
         ListCarteraComponent,
         DetailCarteraComponent,
-        ComportamientoComponent
+        ComportamientoComponent,
+        DetalleArchivo,
+        ActionComportamiento
     ],
     imports:[
         MaterialModule,

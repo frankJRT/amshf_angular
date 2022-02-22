@@ -1,10 +1,15 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { ComportamientoService } from 'src/app/service/comportamiento.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { PeriodoProceso } from 'src/app/models/periodo-proceso';
 import { MatTableDataSource } from '@angular/material/table';
+import { ControlEnvio } from 'src/app/models/control-envio';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DetalleArchivo } from './DetalleArchivo/detallearchivo.component';
+import { ActionComportamiento } from './ActionComportamiento/actioncomportamiento.component';
+
 
 
 @Component({
@@ -14,8 +19,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ComportamientoComponent implements OnInit {
   periodoProcesos!:PeriodoProceso[];
-  displayedColumns: string[] = ['id', 'd_Alta', 'I_Periodo','I_Cartera_Comportamiento','actions'];
-  
+  controlEnvios!:ControlEnvio[];
+  displayedColumns: string[] = ['id', 'd_Alta', 'I_Periodo','actions','production'];
+  displayedColumnsFile: string[] = ['fileName','claveAdministradorCartera','claveIFCedioCartera','detalle','actions'];
+
 
   @Input() idCartera=0; 
   myForm = new FormGroup({
@@ -25,13 +32,10 @@ export class ComportamientoComponent implements OnInit {
     fileSource: new FormControl('', [Validators.required])
   });
 
-
-
-
- 
   constructor(private http: HttpClient
     , private comportamientoService:ComportamientoService
-    ,private router: Router){
+    ,private router: Router,
+    public dialog: MatDialog){
 
   }
 
@@ -76,15 +80,53 @@ export class ComportamientoComponent implements OnInit {
       })
   }
 
-
-
   getArchivos(event:Event,periodoProces:PeriodoProceso):void{
     let navigationExtras: NavigationExtras = {
       queryParams: {
         cartera: periodoProces.id
       }
     }; 
+
+    this.comportamientoService.listFilesbyCartera(periodoProces.id).subscribe(
+      files => {
+        this.controlEnvios = files;
+      }
+    );
+  }
+
+  dataProduction(event:Event,periodoProces:PeriodoProceso):void{
+    this.dialog.open(ActionComportamiento, {
+      data: {
+        idElement: periodoProces.id,
+        actionName: periodoProces.d_Alta,
+        descripcion:'Subir Comportamiento'
+      },
+    });
+    
   }
 
 
+  openDialog(event:Event,ce:ControlEnvio) {
+    
+    this.dialog.open(DetalleArchivo, {
+      data: {
+        id: ce.id,
+        name:ce.fileName
+      },
+    });
+  }
+
+  deleteFiles(event:Event,ce:ControlEnvio) {
+    
+    this.dialog.open(ActionComportamiento, {
+      data: {
+        idElement: ce.id,
+        actionName:ce.fileName,
+        descripcion:'Eliminar Comporamiento'
+      },
+    });
+  }
 }
+
+
+
