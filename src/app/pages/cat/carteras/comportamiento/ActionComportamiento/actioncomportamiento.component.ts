@@ -3,7 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ComportamientoService } from 'src/app/service/comportamiento.service';
 import { DialogData } from '../DetalleArchivo/detallearchivo.component';
-
+import { saveAs } from 'file-saver';
+import * as FileSaver from 'file-saver';
 
 export interface ActionData {
     idElement: 0;
@@ -19,7 +20,7 @@ export interface ActionData {
 
 export class ActionComportamiento implements OnInit{
 
-    actionName:String='';
+    actionName:string='';
     descripcion:String='';
     idElement:number=0;
 
@@ -59,7 +60,18 @@ export class ActionComportamiento implements OnInit{
                   alert("Informacion cargada con Exito")
                   this.dialogRef.close();
                 }
-              );            
+              );
         }
+
+        else if(this.descripcion, 'Generar V9'){                       
+            this.comportamientoService.generaV9(this.idElement,this.actionName).subscribe(response => {
+              console.log(response);
+              this.dialogRef.close();
+              FileSaver.saveAs(response, 'comportamientoV9_' + this.actionName+'.xlsx');
+            });
+        }
+
     }
 }
+
+

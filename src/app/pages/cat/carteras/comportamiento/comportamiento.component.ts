@@ -9,6 +9,7 @@ import { ControlEnvio } from 'src/app/models/control-envio';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DetalleArchivo } from './DetalleArchivo/detallearchivo.component';
 import { ActionComportamiento } from './ActionComportamiento/actioncomportamiento.component';
+import { Periodo } from 'src/app/models/periodo';
 
 
 
@@ -95,11 +96,28 @@ export class ComportamientoComponent implements OnInit {
   }
 
   dataProduction(event:Event,periodoProces:PeriodoProceso):void{
+
+    let id = <Periodo> periodoProces.i_Periodo; 
+
     this.dialog.open(ActionComportamiento, {
       data: {
         idElement: periodoProces.id,
-        actionName: periodoProces.d_Alta,
+        actionName: id.id,
         descripcion:'Subir Comportamiento'
+      },
+    });
+    
+  }
+
+  generateV9(event:Event,periodoProces:PeriodoProceso):void{
+
+    let id = <Periodo> periodoProces.i_Periodo; 
+
+    this.dialog.open(ActionComportamiento, {
+      data: {
+        idElement: periodoProces.id,
+        actionName: id.id,
+        descripcion:'Generar V9'
       },
     });
     
@@ -126,6 +144,8 @@ export class ComportamientoComponent implements OnInit {
       },
     });
   }
+
+  
 }
 
 

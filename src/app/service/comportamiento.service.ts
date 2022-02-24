@@ -14,6 +14,7 @@ const  cabecera = {headers: new HttpHeaders({'Content-Type':'application/json'})
 export class ComportamientoService {
   
   comportamientoUrl = environment.comportamientoUrl;
+  comportamientoV9Url = environment.comportamientoV9Url;
 
   constructor(private httpClient: HttpClient) { }
   
@@ -46,6 +47,13 @@ export class ComportamientoService {
 
   public uploadProdData(id:number){
     return this.httpClient.get(this.comportamientoUrl+'spInsertDataPeriodoProceso/'+id, {responseType: 'text'});
+  }
+
+  public generaV9(idCartera:number,idPeriodo:string){
+    let params = new HttpParams().set('id',idCartera).set('idPeriodo',idPeriodo);
+    return this.httpClient.get(this.comportamientoV9Url+'generaComportamientoV9',
+      {params:params, headers:new HttpHeaders({'Content-Type':'application/json'}), responseType: 'blob'}
+    );
   }
 
 }
